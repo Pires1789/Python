@@ -7,3 +7,5 @@ O projeto é proposto no curso "Análise de Dados com Python" da Data Science Ac
 
 - Gerar uma base de pacientes com mais de 50 anos;
 - Criar uma nova coluna indicando se o paciente é obeso ou não. Esse cálculo levará em conta o IMC dos pacientes.
+
+Para testar outras opções, incluí alguns gráficos.
