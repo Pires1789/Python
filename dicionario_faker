@@ -1,0 +1,48 @@
+# Biblioteca Faker é uma boa opção para construir dataset "fakes". Esses podem ser usados como base para 
+# o estudo da linguagem Python (que é o nosso principal objetivo neste respositório)
+# Neste exemplo, estou simulando dados sobre a Educação no Brasil. Basicamente quero saber quais alunos passaram ou não no vestibular e algumas condições socio-economicas.
+  
+#Instalação e importação do pacote
+pip install faker
+import csv
+from faker import Faker
+
+#Padroniza a linguagem do Faker para Português BR  
+fake = Faker('pt_BR')
+
+# Crie um arquivo CSV para armazenar os dados
+with open('educacao_brasil_dataset.csv', 'w', newline='', encoding='utf-8') as csvfile:
+    fieldnames = ['Nome', 'Idade', 'Gênero', 'Cidade', 'Estado', 'Escola', 'Nota_Matematica', 'Nota_Portugues', 'Passou_Vestibular', 'Ano_Conclusao']
+    writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
+    
+    # Escreva os cabeçalhos no arquivo CSV
+    writer.writeheader()
+    
+    # Gere 300 linhas de dados fictícios
+    for _ in range(300):
+        nome = fake.name()
+        idade = fake.random_int(min=16, max=30)
+        genero = fake.random_element(elements=('Masculino', 'Feminino'))
+        cidade = fake.city()
+        estado = fake.state_abbr()
+        escola = fake.company()
+        nota_matematica = fake.random_uniform(min=0, max=10, precision=2)
+        nota_portugues = fake.random_uniform(min=0, max=10, precision=2)
+        passou_vestibular = fake.random_element(elements=('Sim', 'Não'))
+        ano_conclusao = fake.random_int(min=2010, max=2023)
+        
+        # Escreva os dados no arquivo CSV
+        writer.writerow({
+            'Nome': nome,
+            'Idade': idade,
+            'Gênero': genero,
+            'Cidade': cidade,
+            'Estado': estado,
+            'Escola': escola,
+            'Nota_Matematica': nota_matematica,
+            'Nota_Portugues': nota_portugues,
+            'Passou_Vestibular': passou_vestibular,
+            'Ano_Conclusao': ano_conclusao
+        })
+
+print("Dataset gerado com sucesso em 'educacao_brasil_dataset.csv'.")
